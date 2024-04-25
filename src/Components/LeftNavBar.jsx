@@ -1,9 +1,7 @@
-import {useState} from 'react'
-
-export default function LeftNavBar ({emails, currentTab, setCurrentTab}) {
+export default function LeftNavBar ({emails, currentTab, setCurrentTab, setHideRead, hideRead}) {
     const unreadEmails = emails.filter(email => !email.read)
     const starredEmails = emails.filter(email => email.starred)
-    const [hideRead, setHideRead] = useState(false)
+   
 
     return (
         <nav className="left-menu">
