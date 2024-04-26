@@ -1,4 +1,8 @@
-export default function Header () {
+export default function Header ({setSearch}) {
+  function updateSearch (e) {
+    setSearch(e.target.value)
+  }
+
     return (
         <header className="header">
         <div className="left-menu">
@@ -13,7 +17,7 @@ export default function Header () {
         </div>
 
         <div className="search">
-          <input className="search-bar" placeholder="Search mail" />
+          <input onChange={updateSearch} className="search-bar" placeholder="Search mail" />
         </div>
       </header>
     )

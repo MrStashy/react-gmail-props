@@ -9,11 +9,13 @@ import EmailDisplay from "./Components/EmailDisplay.jsx";
 const getReadEmails = (emails) => emails.filter((email) => !email.read);
 const getStarredEmails = (emails) => emails.filter((email) => email.starred);
 
+
 function App() {
   const [emails, setEmails] = useState(initialEmails);
   const [hideRead, setHideRead] = useState(false);
   const [currentTab, setCurrentTab] = useState("inbox");
   const [currentDisplay, setDisplay] = useState('emails');
+  const [searchTerm, setSearch] = useState('')
 
   let filteredEmails = emails;
 
@@ -22,9 +24,13 @@ function App() {
   if (currentTab === "starred")
     filteredEmails = getStarredEmails(filteredEmails);
 
+  if (searchTerm) {
+    filteredEmails = filteredEmails.filter((email) => email.sender.toLowerCase().includes(searchTerm.toLowerCase()) || email.title.toLowerCase().includes(searchTerm.toLowerCase()))
+  }
+
   return (
     <div className="app">
-      <Header />
+      <Header setSearch={setSearch} searchTerm={searchTerm}/>
       <LeftNavBar
         currentTab={currentTab}
         setCurrentTab={setCurrentTab}
